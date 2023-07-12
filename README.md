@@ -15,10 +15,16 @@ constructor() {
 ```
 
 When we call the increment() function then we call the "counter" signal update() method. 
+The update() method updates the value of the signal based on its current value, and notify any dependents.
 ```
  increment() {
     this.counter.update((oldCounter) => oldCounter + 1);
   }
+```
+
+Another option is to set the signal value:
+```
+this.counter.set(this.counter() + 1);
 ```
 
 This is the component whole Typescript code:
