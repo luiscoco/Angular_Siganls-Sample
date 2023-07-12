@@ -51,7 +51,7 @@ export class SignalsComponent {
 ```
 
 ## Signals component Template
-We show in a paragraph HTML element the counter signal value:
+We show in a paragraph HTML element the "counter" signal value:
 ```
 <p id="counter-output">Counter: {{ counter() }}</p>
 ```
