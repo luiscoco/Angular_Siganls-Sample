@@ -1,27 +1,73 @@
-# AngularSignals
+# Angular Signals
+We are going to start explaining signals in Angular with a simple example.
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.0.0-rc.1.
+## Signals component Typescript
+We first define a "counter" signal and we initialize to zero value:
+```
+ counter = signal(0);
+```
 
-## Development server
+In the component constructor we call the "effect()" function to write in the internet browser console the "counter" value:
+```
+constructor() {
+    effect(() => console.log(this.counter()));
+  }
+```
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+When we call the increment() function then we call the "counter" signal update() method. 
+```
+ increment() {
+    this.counter.update((oldCounter) => oldCounter + 1);
+  }
+```
 
-## Code scaffolding
+This is the component whole Typescript code:
+```Typescript
+import { Component, signal, effect } from '@angular/core';
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+@Component({
+  selector: 'app-signals',
+  templateUrl: './signals.component.html',
+  standalone: true,
+})
+export class SignalsComponent {
+  counter = signal(0);
+  constructor() {
+    effect(() => console.log(this.counter()));
+  }
+  increment() {
+    this.counter.update((oldCounter) => oldCounter + 1);
+  }
+  decrement() {
+    this.counter.update((oldCounter) => oldCounter - 1);
+  }
+}
+```
 
-## Build
+## Signals component Template
+We show in a paragraph (<p>...</p>) HTML element the counter signal value:
+```
+<p id="counter-output">Counter: {{ counter() }}</p>
+```
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+When we press the Increment button then we call the increment() function:
+```
+<button (click)="increment()">Increment</button>
+```
 
-## Running unit tests
+This is the template whole code:
+```HTML
+<h1>Signals</h1>
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+<div id="counter">
+  <p id="counter-output">Counter: {{ counter() }}</p>
+  <div id="counter-btns">
+    <button (click)="decrement()">Decrement</button>
+    <button (click)="increment()">Increment</button>
+  </div>
+</div>
+```
 
-## Running end-to-end tests
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
 
-## Further help
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
