@@ -2,7 +2,7 @@
 We are going to start explaining signals in Angular with a simple example.
 
 ## Signals component Typescript
-We first define a "counter" signal and we initialize to zero value:
+We first define a "counter" signal and we initialize to zero value. The signal keyword creates a Signal that can be "set" or "updated" directly.
 ```
  counter = signal(0);
 ```
