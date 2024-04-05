@@ -1,5 +1,7 @@
 # Angular Signals
 
+Please for a better explanation see these youtube videos: https://www.youtube.com/playlist?list=PLErOmyzRKOCr07Kcnx75Aqh6PWSbIokPB
+
 To clarify the concepts of **Signal** and **Zone.js** in **Angular**, especially considering their roles and differences in **Angular 17**, we need a brief understanding of both technologies within the context of Angular, a platform and framework for building single-page client applications using HTML and TypeScript.
 
 **Zone.js** is a library that Angular has used for **automatic change detection**. It works by monkey-patching asynchronous APIs in the browser (like setTimeout, Promise, etc.) to notify Angular when to run change detection. This means that when you perform an asynchronous operation, Zone.js ensures Angular knows when the operation completes so that it can **update the UI with any changes**. This process is crucial for keeping the application's state and the UI in sync.
