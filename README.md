@@ -1,4 +1,7 @@
 # Angular Signals
+
+![image](https://github.com/luiscoco/Angular_Signals-Sample/assets/32194879/c74a6b21-0a06-43ca-832e-f566f7d57b77)
+
 We are going to start explaining signals in Angular with a simple example.
 
 ## Signals component Typescript
