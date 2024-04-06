@@ -1,5 +1,7 @@
 # Angular Signals
 
+# 1. Introduction
+
 Please for a better explanation see these youtube videos: https://www.youtube.com/playlist?list=PLErOmyzRKOCr07Kcnx75Aqh6PWSbIokPB
 
 To clarify the concepts of **Signal** and **Zone.js** in **Angular**, especially considering their roles and differences in **Angular 17**, we need a brief understanding of both technologies within the context of Angular, a platform and framework for building single-page client applications using HTML and TypeScript.
@@ -26,7 +28,10 @@ In summary, while **Zone.js** has been an integral part of Angular for **managin
 
 We are going to start explaining signals in Angular with a simple example.
 
-## Signals component Typescript
+# 2. Signal sample
+
+## 2.1. Signals component Typescript
+
 We first define a "counter" signal and we initialize to zero value. The signal keyword creates a Signal that can be "set" or "updated" directly.
 ```
  counter = signal(0);
@@ -75,7 +80,8 @@ export class SignalsComponent {
 }
 ```
 
-## Signals component Template
+## 2.2. Signals component Template
+
 We show in a paragraph HTML element the "counter" signal value:
 ```
 <p id="counter-output">Counter: {{ counter() }}</p>
@@ -99,6 +105,43 @@ This is the template whole code:
 </div>
 ```
 
+# 3. Writable signals
+
+Writable signals provide an API for updating their values directly. You create writable signals by calling the **signal** function with the **signal's initial value**:
+
+```typescript
+const count = signal(0);
+// Signals are getter functions - calling them reads their value.
+console.log('The count is: ' + count());
+```
+
+To change the value of a writable signal, either **.set()** it directly:
+
+```typescript
+count.set(3);
+```
+
+or use the **.update()** operation to compute a new value from the previous one:
+
+```typescript
+// Increment the count by 1.
+count.update(value => value + 1);
+```
+
+Writable signals have the type **WritableSignal**.
+
+# 4. Computed signals
+
+**Computed signal** are **read-only signals** that **derive their value from other signals**.
+
+You define computed signals using the computed function and specifying a derivation:
+
+```typescript
+const count: WritableSignal<number> = signal(0);
+const doubleCount: Signal<number> = computed(() => count() * 2);
+```
+
+The **doubleCount** signal depends on the **count** signal. Whenever **count** updates, Angular knows that **doubleCount** needs to update as well.
 
 
 
