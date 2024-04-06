@@ -153,7 +153,17 @@ doubleCount.set(3);
 
 produces a compilation error, because **doubleCount** is not a **WritableSignal**.
 
-## 4.2 Computed signal dependencies are dynamic
+## 4.2. Computed signals are both lazily evaluated and memoized
+
+doubleCount's derivation function does not run to calculate its value until the first time you read doubleCount. 
+
+The calculated value is then cached, and if you read doubleCount again, it will return the cached value without recalculating.
+
+If you then change count, Angular knows that doubleCount's cached value is no longer valid, and the next time you read doubleCount its new value will be calculated.
+
+As a result, you can safely perform computationally expensive derivations in computed signals, such as filtering arrays.
+
+## 4.3. Computed signal dependencies are dynamic
 
 Only the signals actually read during the derivation are tracked. For example, in this computed the count signal is only read if the showCount signal is true:
 
