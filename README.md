@@ -254,4 +254,17 @@ export class EffectiveCounterComponent {
 }
 ```
 
+## 4.6. Destroying effects
+
+When you create an effect, it is automatically destroyed when its enclosing context is destroyed. 
+
+This means that effects created within components are destroyed when the component is destroyed. The same goes for effects within directives, services, etc.
+
+**Effects return an EffectRef** that you can use to destroy them manually, by calling the **.destroy()** method. 
+
+You can combine this with the **manualCleanup** option to create an effect that lasts until it is manually destroyed.
+
+Be careful to actually clean up such effects when they're no longer required.
+
+
 
