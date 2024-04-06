@@ -190,5 +190,24 @@ Note that dependencies can be removed during a derivation as well as added.
 
 If you later set showCount back to false, then count will no longer be considered a dependency of conditionalCount.
 
+## 4.4. Effects
+
+Signals are useful because they notify interested consumers when they change. An effect is an operation that runs whenever one or more signal values change. You can create an effect with the effect function:
+
+```typescript
+effect(() => {
+  console.log(`The current count is: ${count()}`);
+});
+```
+
+Effects always run at least once. When an effect runs, it tracks any signal value reads. 
+
+Whenever any of these signal values change, the effect runs again.
+
+Similar to computed signals, effects keep track of their dependencies dynamically, and only track signals which were read in the most recent execution.
+
+Effects always execute asynchronously, during the change detection process.
+
+
 
 
