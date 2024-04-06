@@ -208,6 +208,50 @@ Similar to computed signals, effects keep track of their dependencies dynamicall
 
 Effects always execute asynchronously, during the change detection process.
 
+## 4.5. Injection context
 
+By default, you can only create an effect() within an injection context (where you have access to the inject function). 
+
+The easiest way to satisfy this requirement is to call effect within a component, directive, or service constructor:
+
+```typescript
+@Component({...})
+export class EffectiveCounterComponent {
+  readonly count = signal(0);
+  constructor() {
+    // Register a new effect.
+    effect(() => {
+      console.log(`The count is: ${this.count()}`);
+    });
+  }
+}
+```
+
+Alternatively, you can assign the effect to a field (which also gives it a descriptive name).
+
+```typescript
+@Component({...})
+export class EffectiveCounterComponent {
+  readonly count = signal(0);
+  private loggingEffect = effect(() => {
+    console.log(`The count is: ${this.count()}`);
+  });
+}
+```
+
+To create an effect outside of the constructor, you can pass an Injector to effect via its options:
+
+```typescript
+@Component({...})
+export class EffectiveCounterComponent {
+  readonly count = signal(0);
+  constructor(private injector: Injector) {}
+  initializeLogging(): void {
+    effect(() => {
+      console.log(`The count is: ${this.count()}`);
+    }, {injector: this.injector});
+  }
+}
+```
 
 
